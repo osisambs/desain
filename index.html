@@ -79,12 +79,25 @@
         // Fungsi untuk mengunduh gambar
         function downloadImage() {
             const imageUrl = document.getElementById('downloadButton').getAttribute('data-url');
-            const a = document.createElement('a');
-            a.href = imageUrl;
-            a.download = imageUrl.split('/').pop(); // Nama file diambil dari bagian akhir URL
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+
+            // Cek apakah URL valid
+            if (imageUrl) {
+                const a = document.createElement('a');
+                a.href = imageUrl;
+                a.download = imageUrl.split('/').pop(); // Nama file diambil dari bagian akhir URL
+
+                // Jika URL adalah GitHub Raw, kita perlu memastikan URL langsung mengarah ke gambar
+                if (imageUrl.includes('github.com')) {
+                    // Ubah ke URL raw GitHub
+                    a.href = imageUrl.replace('github.com', 'raw.githubusercontent.com').replace('/blob', '');
+                }
+
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else {
+                alert('URL gambar tidak valid!');
+            }
         }
     </script>
 
