@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Platform Menambahkan dan Mengunduh Gambar</title>
+    <link rel="shortcut icon" href="logo-persami.png" type="favicon/ico" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         body {
@@ -33,6 +34,34 @@
         button:hover {
             background-color: #45a049;
         }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+            button {
+                width: 100%;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            .input-section input {
+                width: 100%;
+                padding: 12px;
+            }
+            button {
+                padding: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -58,13 +87,11 @@
         
         <img src="DESAIN-BAJU-PERSAMI/coksu.png" alt="baju coksu desaim">
         <p><button type="button" class="btn btn-success" onclick="downloadImageFromUrl('DESAIN-BAJU-PERSAMI/coksu.png')">Mau Download?</button>&nbsp;&nbsp;ATAU&nbsp;&nbsp;<button type="button" class="btn btn-info" onclick="viewImage('DESAIN-BAJU-PERSAMI/coksu.png')">Lihat Gambarnya?</button></p>
-    </div>
-
-            <img src="BANNER-PERSAMI/1.png" alt="banner 1">
+        
+        <img src="BANNER-PERSAMI/1.png" alt="banner 1">
         <p><button type="button" class="btn btn-success" onclick="downloadImageFromUrl('BANNER-PERSAMI/1.png')">Mau Download?</button>&nbsp;&nbsp;ATAU&nbsp;&nbsp;<button type="button" class="btn btn-info" onclick="viewImage('DESAIN-BAJU-PERSAMI/coksu.png')">Lihat Gambarnya?</button></p>
-    </div>
-
-            <img src="BANNER-PERSAMI/2.png" alt="banner 2">
+        
+        <img src="BANNER-PERSAMI/2.png" alt="banner 2">
         <p><button type="button" class="btn btn-success" onclick="downloadImageFromUrl('BANNER-PERSAMI/2.png')">Mau Download?</button>&nbsp;&nbsp;ATAU&nbsp;&nbsp;<button type="button" class="btn btn-info" onclick="viewImage('DESAIN-BAJU-PERSAMI/coksu.png')">Lihat Gambarnya?</button></p>
     </div>
 
@@ -138,8 +165,8 @@
             // Menampilkan SweetAlert setelah gambar diunduh
             Swal.fire({
                 icon: 'success',
-                title: 'Gambar berhasil diunduh!',
-                text: 'Gambar Anda sedang diunduh...',
+                title: 'Yeayyy!!, Gambar berhasil diunduh!',
+                text: 'Awali hari mu yang maniezzz maniezzs hehe_<',
             });
         }
 
