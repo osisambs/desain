@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="theme-color" content="#4CAF50"> <!-- Ganti warna tab di browser -->
-
+    <meta name="theme-color" content="#4CAF50">
     <title>Platform Menambahkan dan Mengunduh Gambar</title>
     <link rel="shortcut icon" href="logo-persami.png" type="favicon/ico" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -23,28 +22,6 @@
             text-align: center;
             color: #333;
             margin-bottom: 20px;
-        }
-        .input-section {
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        button {
-            padding: 12px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #45a049;
         }
         .image-grid {
             display: grid;
@@ -67,36 +44,6 @@
         .image-card button {
             width: 100%;
         }
-        .image-card button + button {
-            margin-top: 5px;
-        }
-        .image-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            .image-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .container {
-                padding: 5px;
-            }
-            .image-grid {
-                grid-template-columns: 1fr;
-            }
-            button {
-                padding: 12px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -104,119 +51,62 @@
     <div class="container">
         <a href="https://github.com/osisambs/desain" target="_blank">Github Me</a>
         <h1>Menambahkan dan Mengunduh Gambar dari GitHub</h1>
-        
-        <div class="input-section">
-            <label for="imageUrl">Masukkan URL Gambar GitHub:</label><br>
-            <input type="text" id="imageUrl" placeholder="Contoh: https://github.com/username/repo/raw/main/image.jpg">
-            <button onclick="loadImage()">Tampilkan Gambar</button>
-        </div>
-
-        <div id="imageContainer" class="image-container"></div>
 
         <div id="imageGrid" class="image-grid">
             <!-- Example Image Cards -->
             <div class="image-card">
                 <img src="DESAIN-BAJU-PERSAMI/biru.png" alt="baju biru desaim">
-                <button type="button" class="btn btn-success" onclick="downloadImageFromUrl('DESAIN-BAJU-PERSAMI/biru.png')">Mau Download?</button>
                 <button type="button" class="btn btn-info" onclick="viewImage('DESAIN-BAJU-PERSAMI/biru.png')">Lihat Gambarnya?</button>
             </div>
             <div class="image-card">
                 <img src="DESAIN-BAJU-PERSAMI/coksu.png" alt="baju coksu desaim">
-                <button type="button" class="btn btn-success" onclick="downloadImageFromUrl('DESAIN-BAJU-PERSAMI/coksu.png')">Mau Download?</button>
                 <button type="button" class="btn btn-info" onclick="viewImage('DESAIN-BAJU-PERSAMI/coksu.png')">Lihat Gambarnya?</button>
             </div>
             <div class="image-card">
                 <img src="baju-birumuda-polos.jpg" alt="baju coksu desaim">
-                <button type="button" class="btn btn-success" onclick="downloadImageFromUrl('baju-birumuda-polos.jpg')">Mau Download?</button>
                 <button type="button" class="btn btn-info" onclick="viewImage('baju-birumuda-polos.jpg')">Lihat Gambarnya?</button>
             </div>
-            <div class="image-card">
-                <img src="baju-polos-coksu.jpg" alt="baju coksu desaim">
-                <button type="button" class="btn btn-success" onclick="downloadImageFromUrl('baju-polos-coksu.jpg')">Mau Download?</button>
-                <button type="button" class="btn btn-info" onclick="viewImage('baju-polos-coksu.jpg')">Lihat Gambarnya?</button>
-            </div>
-            <div class="image-card">
-                <img src="BANNER-PERSAMI/1.png" alt="banner 1">
-                <button type="button" class="btn btn-success" onclick="downloadImageFromUrl('BANNER-PERSAMI/1.png')">Mau Download?</button>
-                <button type="button" class="btn btn-info" onclick="viewImage('BANNER-PERSAMI/1.png')">Lihat Gambarnya?</button>
-            </div>
-            <div class="image-card">
-                <img src="BANNER-PERSAMI/2.png" alt="banner 2">
-                <button type="button" class="btn btn-success" onclick="downloadImageFromUrl('BANNER-PERSAMI/2.png')">Mau Download?</button>
-                <button type="button" class="btn btn-info" onclick="viewImage('BANNER-PERSAMI/2.png')">Lihat Gambarnya?</button>
-            </div>
         </div>
-
-        <br><br>
-        <button id="downloadButton" style="display: none;" onclick="downloadImage()">Unduh Gambar</button>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Lihat Gambar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" src="" alt="Gambar Modal" style="width: 100%; max-height: 500px; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Fungsi untuk menampilkan gambar berdasarkan URL
-        function loadImage() {
-            const imageUrl = document.getElementById('imageUrl').value;
-            const imageContainer = document.getElementById('imageContainer');
-            const downloadButton = document.getElementById('downloadButton');
-
-            if (imageUrl && isValidImageUrl(imageUrl)) {
-                imageContainer.innerHTML = `<img src="${imageUrl}" alt="Gambar GitHub" style="max-width: 100%;">`;
-                downloadButton.style.display = 'inline-block';
-                downloadButton.setAttribute('data-url', imageUrl);
-            } else {
-                imageContainer.innerHTML = '<p style="color: red;">URL gambar tidak valid.</p>';
-                downloadButton.style.display = 'none';
-            }
-        }
-
-        function isValidImageUrl(url) {
-            return /\.(jpg|jpeg|png|gif|bmp|svg|webp)$/i.test(url);
-        }
-
-        function downloadImage() {
-            const imageUrl = document.getElementById('downloadButton').getAttribute('data-url');
-
-            if (imageUrl) {
-                const a = document.createElement('a');
-                a.href = imageUrl;
-                a.download = imageUrl.split('/').pop();
-
-                if (imageUrl.includes('github.com')) {
-                    a.href = imageUrl.replace('github.com', 'raw.githubusercontent.com').replace('/blob', '');
-                }
-
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Gambar berhasil diunduh!',
-                    text: 'Gambar Anda sedang diunduh...',
-                });
-            } else {
-                alert('URL gambar tidak valid!');
-            }
-        }
-
-        function downloadImageFromUrl(imageUrl) {
-            const a = document.createElement('a');
-            a.href = imageUrl;
-            a.download = imageUrl.split('/').pop();
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Yeayyy!!, Gambar berhasil diunduh!',
-                text: 'Awali hari mu yang maniezzz maniezzs hehe_<',
-            });
-        }
-
+        // Fungsi untuk melihat gambar dalam modal
         function viewImage(imageUrl) {
-            window.open(imageUrl, '_blank');
+            // Set image src untuk modal
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageUrl;
+
+            // Tampilkan modal menggunakan Bootstrap
+            $('#imageModal').modal('show');
+
+            // Menampilkan SweetAlert2
+            Swal.fire({
+                icon: 'info',
+                title: 'Gambar Ditampilkan',
+                text: 'Anda sekarang melihat gambar dalam modal!',
+            });
         }
     </script>
 </body>
