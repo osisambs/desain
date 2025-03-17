@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Menambahkan dan Mengunduh Gambar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+        .input-section {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Menambahkan dan Mengunduh Gambar dari GitHub</h1>
+        
+        <div class="input-section">
+            <label for="imageUrl">Masukkan URL Gambar GitHub:</label><br>
+            <input type="text" id="imageUrl" placeholder="Contoh: https://github.com/username/repo/raw/main/image.jpg" style="width: 80%; padding: 10px;">
+        </div>
+
+        <button onclick="loadImage()">Tampilkan Gambar</button>
+        <div id="imageContainer"></div>
+        
+        <br><br>
+        <button id="downloadButton" style="display: none;" onclick="downloadImage()">Unduh Gambar</button>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan gambar berdasarkan URL
+        function loadImage() {
+            const imageUrl = document.getElementById('imageUrl').value;
+            const imageContainer = document.getElementById('imageContainer');
+            const downloadButton = document.getElementById('downloadButton');
+
+            // Validasi URL gambar
+            if (imageUrl && isValidImageUrl(imageUrl)) {
+                // Menampilkan gambar
+                imageContainer.innerHTML = `<img src="${imageUrl}" alt="Gambar GitHub">`;
+                // Menampilkan tombol download
+                downloadButton.style.display = 'inline-block';
+                downloadButton.setAttribute('data-url', imageUrl);
+            } else {
+                imageContainer.innerHTML = '<p style="color: red;">URL gambar tidak valid.</p>';
+                downloadButton.style.display = 'none';
+            }
+        }
+
+        // Fungsi untuk mengecek apakah URL valid dan menunjuk ke gambar
+        function isValidImageUrl(url) {
+            return /\.(jpg|jpeg|png|gif|bmp|svg|webp)$/i.test(url);
+        }
+
+        // Fungsi untuk mengunduh gambar
+        function downloadImage() {
+            const imageUrl = document.getElementById('downloadButton').getAttribute('data-url');
+            const a = document.createElement('a');
+            a.href = imageUrl;
+            a.download = imageUrl.split('/').pop(); // Nama file diambil dari bagian akhir URL
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+
+</body>
+</html>
